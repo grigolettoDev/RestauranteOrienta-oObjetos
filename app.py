@@ -9,7 +9,7 @@ restaurante_italiano.recebe_avaliacao('Sophia',5)
 restaurante_italiano.recebe_prato('Lasanha',25,'Massa com queijo molho branco e carne moída')
 restaurante_italiano.recebe_bebida('Coca-Cola',10,'Pequeno')
 
-#testes
+#testes 2
 
 def main():
     
