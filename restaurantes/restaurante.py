@@ -1,6 +1,7 @@
 from restaurantes.avaliacao import Avaliacao
 from cardapio.prato import Prato
 from cardapio.bebida import Bebida
+from cardapio.item_cardapio import Cardapio
 
 
 
@@ -18,8 +19,7 @@ class Restaurante:
         self._status = False
         Restaurante.restaurantes.append(self)
         self._avaliacao = []
-        self._prato = []
-        self._bebida = []
+        self._cardapio = []
     #Ativan
     # do restaurante
     def alterna_estado(self):
@@ -47,14 +47,6 @@ class Restaurante:
         avaliacao = Avaliacao(cliente,nota)
         self._avaliacao.append(avaliacao)
 
-    def recebe_prato(self,nome,preco,descricao):
-            prato_recebido = Prato(nome,preco,descricao)
-            self._prato.append(prato_recebido)
-
-    def recebe_bebida(self,nome,preco,tamanho):
-            bebida_recebido = Bebida(nome,preco,tamanho)
-            self._bebida.append(bebida_recebido)
-
     @property
     def media_nota(self):
         if not self._avaliacao:
@@ -67,8 +59,21 @@ class Restaurante:
                 media = round(media/2,1)
             return media
         
+    
+    def adiciona_no_cardapio(self,item):
+        if isinstance(item,Cardapio):  #Se for uma instância de Cardapio ou se for uma filha de Cardapio
+            self._cardapio.append(item)
+        
 
+    @property
+    def lista_cardapio(self):
+        print(f"Cardapio do Restaurante {self._nome}\n")       
+        for i, item in enumerate(self._cardapio,start=1):
+            #hasattr verifica se tem o atributo
+            mensagem = f'{i}. Nome: {item._nome} | Preço R$: {item._preco} | {"Tamanho: " + item._tamanho if hasattr(item,"_tamanho") else "Descrição: " +  item._descricao}'
+            print(mensagem)
 
+    
 
 
 
